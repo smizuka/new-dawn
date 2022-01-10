@@ -1,0 +1,49 @@
+{{ 'section-image-banner-custom.css' | asset_url | stylesheet_tag }}
+
+{% assign pc_image_1 = section.settings.pc_image_1 %}
+{% assign pc_image_2 = section.settings.pc_image_2 %}
+{% assign sp_image_1 = section.settings.sp_image_1 %}
+{% assign sp_image_2 = section.settings.sp_image_2 %}
+
+<div class="image-banner-img-container">
+  <div class="img-sp">
+    <img src="{{ pc_image_1 | img_url }}" alt="{{ pc_image_1.alt | escape }}">
+  </div>
+  <div class="img-pc">
+    <img src="{{ sp_image_1 | img_url }}" alt="{{ sp_image_1.alt | escape }}">
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "画像バナー",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "pc_image_1",
+      "label": "PC画像1"
+    },
+    {
+      "type": "image_picker",
+      "id": "pc_image_2",
+      "label": "PC画像2"
+    },
+    {
+      "type": "image_picker",
+      "id": "sp_image_1",
+      "label": "SP画像1"
+    },
+    {
+      "type": "image_picker",
+      "id": "sp_image_2",
+      "label": "SP画像2"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SP/PC切り替え画像バナー"
+    }
+  ]
+}
+{% endschema %}

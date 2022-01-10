@@ -1,0 +1,75 @@
+{{ 'section-double-collection.css' | asset_url | stylesheet_tag }}
+
+{% assign collection_1 = section.settings.collection_1 %}
+{% assign collection_2 = section.settings.collection_2 %}
+
+<div class="collection__list">
+  <div class="collection__container">
+    <h2> {{ collection_1.title }}</h2>
+    {% if collection_1 %}
+      <div class="horizontal-list">
+        {% for product_one in collection_1.products %}
+          <div class="item__container">
+            <div class="item-img">
+              <img src='{{ product_one.images.first | image_url: height: 300}}'>
+            </div>       
+            <div class="item-caption">
+                {{product_one.type}}<br>
+                <span>
+                  {{product_one.title}}<br>
+                </span>
+                {{ product_one.price | money }}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+  <div class="collection__container">
+    <h2> {{ collection_2.title }}</h2>
+    {% if collection_2 %}
+      <div class="horizontal-list">
+        {% for product_one in collection_2.products %}
+          <div class="item__container">
+            <div class="item-img">
+              <img src='{{ product_one.images.first | image_url: height: 300}}'>
+            </div>       
+            <div class="item-caption">
+                {{product_one.type}}<br>
+                <span>
+                  {{product_one.title}}<br>
+                </span>
+                {{ product_one.price | money }}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "コレクション",
+  "tag": "section",
+  "class": "spaced-section spaced-section--full-width",
+  "settings": [
+    {
+      "type": "collection",
+        "id": "collection_1",
+      "label": "コレクション選択"
+    },
+    {
+      "type": "collection",
+        "id": "collection_2",
+      "label": "コレクション選択"
+    }
+  ],
+  "presets": [
+    {
+      "name": "ダブルコレクション"
+    }
+  ]
+}
+{% endschema %}

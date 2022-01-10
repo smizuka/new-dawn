@@ -1,0 +1,72 @@
+{{ 'custom-image-with-text.css' | asset_url | stylesheet_tag }}
+
+<script>
+  function imgChange(obj){
+    let mainImageObj = document.getElementById("main_image");
+    mainImageObj.src = obj.src;
+  }
+</script>
+{% assign product_1 = section.settings.product_1 %}
+
+<div class="image_text_with--container">
+  <div class="image--container">
+    <div class="thumbnail--img">
+      {% for i in (0..2) %}
+          {% if i == 0 %}
+            <img src="{{ product_1.images[i] | img_url: '300x' }}" alt="{{ product_1.images[i].alt | escape }}" onclick="imgChange(this)">
+          {% elsif product_1.images[i] %}
+            <img class="thumbnail--img-off" src="{{ product_1.images[i] | img_url: '300x' }}" alt="{{ product_1.images[i].alt | escape }}" onclick="imgChange(this)">
+          {% endif %}
+      {% endfor %}
+    </div>
+    <div class="main--img">
+      {%- if product_1.images.first != blank -%}
+        <img id ="main_image" src="{{ product_1.images.first | img_url: '300x' }}"　alt="{{ product_1.images.first.alt | escape }}">
+      {%- else -%}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </div>
+  </div>
+  <div class="text--container">
+      <h1>
+          {{ product_1.title | escape }}
+      </h1>
+      <h4>
+      {{ product_1.type | escape }}
+      </h4>
+      <h4>
+      {{ product_1.description }}
+      </h4>
+      <h2 class="price-text">
+        {{ product_1.price | money }}
+        <span class="price-text-high">
+          {{ product_1.compare_at_price_min | money }}
+        </span>
+      </h2>
+
+      {% comment %} <div class="image-with-text__text">{{ block.settings.text }}</div> {% endcomment %}
+      <a role="link" href="{{ product_1.url }}" class="custom-image-with-text-button">
+          注目のPick Up商品を購入する
+      </a>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "商品選択",
+  "tag": "section",
+  "class": "spaced-section spaced-section--full-width",
+  "settings": [
+    {
+    "type": "product",
+    "id": "product_1",
+    "label": "商品1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "サムネイル付きテキスト画像"
+    }
+  ]
+}
+{% endschema %}

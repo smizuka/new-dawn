@@ -1,0 +1,28 @@
+.image-banner-img-container{
+    padding: 0px 10px;
+}
+
+.img-sp{
+    width:100%;
+    object-fit: cover;
+}
+
+.img-pc{
+    display: none;
+}
+
+@media (min-width: 900px) {
+    .image-banner-img-container{
+        padding: 0px 20px;
+    }
+
+    .img-pc{
+        width:100%;
+        object-fit: cover;
+        display: inline;
+    }
+
+    .img-sp{
+        display: none;
+    }
+}
