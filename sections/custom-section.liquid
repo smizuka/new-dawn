@@ -1,0 +1,53 @@
+{% if section.settings.section_text != blank %}
+  <h1>{{ section.settings.section_text }}</h1>
+{% endif %}
+{% schema %}
+{
+  "name":  "カスタマイズテキスト",
+  "tag": "section",
+  "class": "customize_text",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_text",
+      "label": "テキスト",
+      "default": "テキストを入力します。  ",
+      "info": "入力した内容が表示されます"
+    },
+    {
+      "type": "checkbox",
+      "id": "section_check",
+      "label": "チェックボックスを作成します"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "block",
+      "name": "カスタマイズブロック",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "block_text",
+          "label": "文章を入力してください"
+        }
+      ]
+    },
+    {
+      "type": "block_second",
+      "name": "2つ目のカスタマイズブロック",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "block_second_text",
+          "label": "リッチテキスト"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "新しく作成したセクション"
+    }
+  ]
+}
+{% endschema %}
